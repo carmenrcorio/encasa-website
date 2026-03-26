@@ -28,9 +28,9 @@ export default function ValueStatement() {
           className="space-y-6"
         >
           <p className="text-lg text-olive/70 leading-relaxed">
-            No competitor has built this. Touch Stay is a guidebook.
-            Guesty&apos;s guest app is a check-in form. En Casa is the first platform
-            that treats the guest as the primary user.
+            Built from the inside out — with a deep understanding of what hosts,
+            coordinators, and operators need to deliver an extraordinary guest experience.
+            En Casa is the first platform that treats the guest as the primary user.
           </p>
 
           <p className="text-lg text-olive/70 leading-relaxed">

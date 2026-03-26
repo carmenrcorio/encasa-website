@@ -16,7 +16,7 @@ export default function SocialProof() {
           Why En Casa
         </motion.p>
 
-        {/* Pull quote — THIS is where Playfair belongs */}
+        {/* Pull quote — Playfair Display italic */}
         <motion.blockquote
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,8 +25,10 @@ export default function SocialProof() {
           className="mb-8"
         >
           <p className="font-serif text-2xl md:text-3xl lg:text-[36px] italic text-white/90 leading-snug">
-            &ldquo;I spent years watching operators send guests a PDF link and call it
-            a guest experience. En Casa is the product I always knew was missing.&rdquo;
+            &ldquo;I built this from the inside — having spent years working closely with
+            operators across the hospitality industry, I understood exactly where
+            the guest experience was falling short. En Casa is the product that
+            was always needed.&rdquo;
           </p>
         </motion.blockquote>
 
@@ -38,19 +40,16 @@ export default function SocialProof() {
           className="mb-16"
         >
           <p className="text-sm text-white/70 font-medium">
-            — Carmen Corio, Founder
-          </p>
-          <p className="text-xs text-white/40 mt-1">
-            Former Enterprise CSM, Guesty. Alumni: Airbnb, HotelTonight.
+            — Carmen Corio, Founder &amp; CEO
           </p>
         </motion.div>
 
-        {/* Tech-company-style badges */}
+        {/* Credential badges */}
         <div className="flex flex-wrap justify-center gap-3">
           {[
-            'Former Guesty Enterprise CSM',
-            'Built at Airbnb + HotelTonight',
-            'No PMS required',
+            'Deep hospitality operations expertise',
+            'Built around real operator workflows',
+            'Works standalone — no PMS required',
           ].map((badge, i) => (
             <motion.span
               key={badge}

@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import BrowserFrame from './BrowserFrame';
+import BlurOverlay from './BlurOverlay';
+import PortalPlaceholder from './PortalPlaceholder';
 
 const rooms = [
   {
@@ -25,7 +28,7 @@ const rooms = [
     cta: { text: 'See how it works', href: '/use-cases' },
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80',
     imageAlt: 'Elegant outdoor wedding garden reception',
-    mockup: 'party',
+    mockup: 'reservations',
   },
   {
     id: 'study',
@@ -51,99 +54,56 @@ const rooms = [
   },
 ];
 
-function PortalCard() {
-  return (
-    <div className="w-72 rounded-xl bg-[#111] border border-white/10 p-5 space-y-3">
-      <p className="font-mono text-[10px] uppercase tracking-wider text-gold/60">Guest Portal</p>
-      <p className="font-serif text-base text-white">Villa Paradiso</p>
-      <div className="bg-gold/10 border border-gold/20 rounded-lg p-2.5">
-        <p className="text-[10px] text-gold/60 mb-0.5">Departure countdown</p>
-        <p className="text-lg font-bold text-gold">10 days</p>
-      </div>
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 text-xs text-white/50">
-          <span className="w-1.5 h-1.5 rounded-full bg-gold/50" />
-          Day 1 — Arrival &amp; welcome dinner
-        </div>
-        <div className="flex items-center gap-2 text-xs text-white/50">
-          <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
-          Day 2 — Boat tour + cliff walk
-        </div>
-      </div>
-    </div>
-  );
+function RoomMockup({ type }) {
+  switch (type) {
+    case 'portal':
+      return (
+        <BrowserFrame
+          src="/images/Guest%20landing%20page.png"
+          alt="En Casa guest portal — private branded landing page with trip overview"
+          width={1800}
+          height={1650}
+          url="portal.encasasoftware.com"
+        >
+          <BlurOverlay style={{ top: '0%', left: '20%', width: '55%', height: '12%' }} />
+        </BrowserFrame>
+      );
+    case 'reservations':
+      return (
+        <BrowserFrame
+          src="/images/Reservations%20admin.png"
+          alt="En Casa reservations view — guest list with properties, dates, and portal status"
+          cropTop={5}
+        >
+          <BlurOverlay style={{ top: '12%', left: '3%', width: '18%', height: '75%' }} />
+        </BrowserFrame>
+      );
+    case 'admin':
+      return (
+        <BrowserFrame
+          src="/images/Command%20center%20admin.png"
+          alt="En Casa admin command center — reservations, messaging, and trip management"
+          cropTop={5}
+        >
+          <BlurOverlay style={{ top: '50%', left: '55%', width: '42%', height: '45%' }} />
+        </BrowserFrame>
+      );
+    case 'profile':
+      return (
+        <BrowserFrame
+          src="/images/Trip%20Guidance.png"
+          alt="En Casa guest portal — trip guidance and travel details"
+          width={1800}
+          height={1600}
+          url="portal.encasasoftware.com"
+        />
+      );
+    default:
+      return <PortalPlaceholder />;
+  }
 }
-
-function PartyCard() {
-  return (
-    <div className="w-72 rounded-xl bg-[#111] border border-white/10 p-5 space-y-3">
-      <p className="font-mono text-[10px] uppercase tracking-wider text-gold/60">Travel Party</p>
-      <p className="text-sm font-medium text-white">Rodriguez Wedding — 150 guests</p>
-      <div className="flex -space-x-2">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="w-8 h-8 rounded-full bg-olive/40 border-2 border-[#111] flex items-center justify-center">
-            <span className="text-[10px] text-white/60">{String.fromCharCode(65 + i)}</span>
-          </div>
-        ))}
-        <div className="w-8 h-8 rounded-full bg-gold/20 border-2 border-[#111] flex items-center justify-center">
-          <span className="text-[10px] text-gold">+144</span>
-        </div>
-      </div>
-      <div className="flex gap-2">
-        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">142 confirmed</span>
-        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400">8 pending</span>
-      </div>
-    </div>
-  );
-}
-
-function AdminCard() {
-  return (
-    <div className="w-72 rounded-xl bg-[#111] border border-white/10 p-5 space-y-3">
-      <p className="font-mono text-[10px] uppercase tracking-wider text-gold/60">Today&apos;s Priorities</p>
-      <div className="space-y-2">
-        {[
-          { label: 'Check-in: Nakamura party', status: 'Urgent', color: 'text-red-400 bg-red-500/10' },
-          { label: 'Invoice #1042 — due today', status: 'Due', color: 'text-amber-400 bg-amber-500/10' },
-          { label: 'Dietary update: Suite 3', status: 'New', color: 'text-blue-400 bg-blue-500/10' },
-        ].map((item) => (
-          <div key={item.label} className="flex items-center justify-between bg-white/5 rounded-lg p-2.5">
-            <span className="text-xs text-white/70">{item.label}</span>
-            <span className={`text-[10px] px-1.5 py-0.5 rounded ${item.color}`}>{item.status}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ProfileCard() {
-  return (
-    <div className="w-72 rounded-xl bg-[#111] border border-white/10 p-5 space-y-3">
-      <p className="font-mono text-[10px] uppercase tracking-wider text-gold/60">Guest Profile</p>
-      <p className="text-sm font-medium text-white">Sarah Chen</p>
-      <p className="text-[10px] text-white/40">3 trips · Preferred guest since 2024</p>
-      <div className="flex flex-wrap gap-1.5">
-        {['Ocean view', 'Vegan', 'Early riser', 'No shellfish', 'Anniversary: June'].map((tag) => (
-          <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-gold/10 text-gold/80 border border-gold/20">
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const mockupComponents = {
-  portal: PortalCard,
-  party: PartyCard,
-  admin: AdminCard,
-  profile: ProfileCard,
-};
 
 function RoomSection({ room }) {
-  const MockupComponent = mockupComponents[room.mockup];
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       <motion.div
@@ -206,7 +166,7 @@ function RoomSection({ room }) {
             </Link>
           </motion.div>
 
-          {/* Right — Product mockup */}
+          {/* Right — Product screenshot or placeholder */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -214,7 +174,9 @@ function RoomSection({ room }) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hidden lg:flex justify-center"
           >
-            <MockupComponent />
+            <div className="w-full max-w-md">
+              <RoomMockup type={room.mockup} />
+            </div>
           </motion.div>
         </div>
       </div>

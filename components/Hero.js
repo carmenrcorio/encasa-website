@@ -3,69 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-
-function PortalMockup() {
-  return (
-    <div className="rounded-xl border border-white/10 overflow-hidden shadow-glow bg-[#111]">
-      {/* Browser chrome */}
-      <div className="bg-white/5 px-4 py-2.5 flex items-center gap-2">
-        <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
-          <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
-          <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
-        </div>
-        <div className="flex-1 mx-3">
-          <div className="bg-white/10 rounded h-5 max-w-[200px] mx-auto flex items-center justify-center">
-            <span className="font-mono text-[10px] text-white/30">portal.villaparadiso.com</span>
-          </div>
-        </div>
-      </div>
-      {/* Portal content */}
-      <div className="p-5 lg:p-6 space-y-4">
-        {/* Property header */}
-        <div>
-          <p className="font-serif text-lg text-white mb-1">Villa Paradiso</p>
-          <p className="text-xs text-white/40">Amalfi Coast, Italy</p>
-        </div>
-        {/* Countdown */}
-        <div className="bg-gold/10 border border-gold/20 rounded-lg p-3">
-          <p className="font-mono text-[10px] uppercase tracking-wider text-gold/70 mb-1">Departure</p>
-          <p className="text-xl font-bold text-gold">10 days</p>
-        </div>
-        {/* Trip details grid */}
-        <div className="grid grid-cols-3 gap-3">
-          <div className="bg-white/5 rounded-lg p-2.5">
-            <p className="text-[10px] text-white/40 mb-0.5">Guests</p>
-            <p className="text-sm font-medium text-white">6</p>
-          </div>
-          <div className="bg-white/5 rounded-lg p-2.5">
-            <p className="text-[10px] text-white/40 mb-0.5">Nights</p>
-            <p className="text-sm font-medium text-white">7</p>
-          </div>
-          <div className="bg-white/5 rounded-lg p-2.5">
-            <p className="text-[10px] text-white/40 mb-0.5">Status</p>
-            <p className="text-sm font-medium text-emerald-400">Confirmed</p>
-          </div>
-        </div>
-        {/* Nav tabs */}
-        <div className="flex gap-1 pt-1">
-          {['Overview', 'Itinerary', 'Concierge', 'Experiences'].map((tab, i) => (
-            <span
-              key={tab}
-              className={`text-[10px] px-2.5 py-1 rounded-full ${
-                i === 0
-                  ? 'bg-gold/20 text-gold font-medium'
-                  : 'text-white/30'
-              }`}
-            >
-              {tab}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+import BrowserFrame, { BrowserFrameCompact } from './BrowserFrame';
 
 export default function Hero() {
   return (
@@ -138,7 +76,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — Product mockup */}
+          {/* Right — Real admin dashboard screenshot */}
           <motion.div
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -149,9 +87,29 @@ export default function Hero() {
               {/* Glow behind mockup */}
               <div className="absolute -inset-8 bg-gold/5 blur-3xl rounded-full" />
               <div className="relative">
-                <PortalMockup />
+                <BrowserFrame
+                  src="/images/Command%20center%20admin.png"
+                  alt="En Casa admin command center showing active trips, upcoming reservations, and guest messages"
+                  priority
+                  cropTop={5}
+                />
               </div>
             </div>
+          </motion.div>
+
+          {/* Mobile — condensed screenshot */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="lg:hidden"
+          >
+            <BrowserFrameCompact
+              src="/images/Command%20center%20admin.png"
+              alt="En Casa admin command center"
+              maxHeight={300}
+              cropTop={5}
+            />
           </motion.div>
         </div>
       </div>

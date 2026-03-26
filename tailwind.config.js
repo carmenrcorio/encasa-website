@@ -17,6 +17,11 @@ module.exports = {
           light: 'rgba(200, 169, 81, 0.15)',
         },
         charcoal: '#1A1A1A',
+        'nav-olive': '#3D6B5C',
+        'dark-section': {
+          DEFAULT: '#1C2B25',
+          deep: '#0F1A14',
+        },
       },
       fontFamily: {
         serif: ['Playfair Display', 'Georgia', 'serif'],

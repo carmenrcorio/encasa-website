@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   MessageCircle,
   CalendarDays,
@@ -7,6 +8,7 @@ import {
   FileText,
   Globe,
 } from 'lucide-react';
+import BrowserFrame from '../../components/BrowserFrame';
 
 export const metadata = {
   title: 'For Operators — En Casa',
@@ -24,43 +26,61 @@ const operatorFeatures = [
     title: 'AI Concierge',
     desc: 'Responds as your brand, in your tone, 24/7. Handles common questions so your team handles exceptions.',
     details: ['Trained on your property details', 'Multi-language support', 'Escalation to human agents'],
+    screenshot: '/images/Guests%20admin.png',
+    screenshotAlt: 'En Casa guest management — CRM with tags, trip history, and portal status',
+    cropTop: 5,
   },
   {
     icon: CalendarDays,
     title: 'Itinerary Builder',
     desc: 'Drag-and-drop day-by-day plans. Attach activities, notes, and maps your guests actually use.',
     details: ['Template-based creation', 'Activity marketplace integration', 'Guest-facing timeline view'],
+    screenshot: '/images/Acitivities%20admin%20side.png',
+    screenshotAlt: 'En Casa activities marketplace — curated experiences guests can browse and book',
+    cropTop: 5,
   },
   {
     icon: Receipt,
     title: 'Invoice & Folio Builder',
     desc: 'Full stay invoicing with line items, tax calculations, and Stripe-powered payment collection.',
     details: ['Itemized folio management', 'Automatic tax calculations', 'Payment links via email'],
+    screenshot: '/images/Admin%20invoice%20center.png',
+    screenshotAlt: 'En Casa invoice center — billing overview with outstanding, paid, drafts, and overdue',
+    cropTop: 5,
   },
   {
     icon: LayoutDashboard,
     title: 'Admin Command Center',
     desc: 'Reservations, CRM, task assignment, messaging, and analytics — all in one place.',
     details: ['Pipeline-style reservation view', 'Team task delegation', 'Real-time activity feed'],
+    screenshot: '/images/Command%20center%20admin.png',
+    screenshotAlt: 'En Casa admin command center — trips, messages, and reservations dashboard',
+    cropTop: 5,
   },
   {
     icon: FileText,
     title: 'Document Center',
     desc: 'Collect passports, contracts, and insurance. Organized per guest, accessible to your team.',
     details: ['Secure upload portal', 'Automatic reminders', 'Compliance-ready storage'],
+    screenshot: '/images/Reservations%20admin.png',
+    screenshotAlt: 'En Casa reservations — guest list with properties, dates, and confirmation status',
+    cropTop: 5,
   },
   {
     icon: Globe,
     title: 'White-Label Portal',
     desc: 'Your domain. Your colors. Your logo. Guests see your brand, not ours.',
     details: ['Custom domain support', 'Brand color & logo theming', 'Personalized email templates'],
+    screenshot: '/images/Guests%20admin.png',
+    screenshotAlt: 'En Casa guest profiles — tags, trip data, and portal invitations',
+    cropTop: 5,
   },
 ];
 
 export default function OperatorsPage() {
   return (
     <div className="min-h-screen bg-ivory pt-32 pb-24">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold mb-4">
           For Operators
         </p>
@@ -77,33 +97,45 @@ export default function OperatorsPage() {
           Our dedicated onboarding team gets your first guest portal live.
         </p>
 
-        {/* Deep-dive feature cards */}
-        <div className="space-y-8 mb-16">
-          {operatorFeatures.map((f) => {
+        {/* Alternating feature sections with real screenshots */}
+        <div className="space-y-20 mb-16">
+          {operatorFeatures.map((f, i) => {
             const Icon = f.icon;
+            const isReversed = i % 2 === 1;
             return (
               <div
                 key={f.title}
-                className="border border-olive/10 rounded-2xl p-8 lg:p-10 shadow-warm"
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center ${
+                  isReversed ? 'lg:direction-rtl' : ''
+                }`}
               >
-                <div className="flex items-start gap-5">
-                  <div className="w-10 h-10 rounded-xl bg-gold/15 flex items-center justify-center flex-shrink-0 mt-1">
-                    <Icon className="w-5 h-5 text-gold" />
+                {/* Text side */}
+                <div className={isReversed ? 'lg:order-2' : ''}>
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-gold/15 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-gold" />
+                    </div>
+                    <h3 className="font-mono text-sm font-medium text-olive pt-2">{f.title}</h3>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-mono text-sm font-medium text-olive mb-2">{f.title}</h3>
-                    <p className="text-olive/70 leading-relaxed mb-4">{f.desc}</p>
-                    <ul className="flex flex-wrap gap-3">
-                      {f.details.map((detail) => (
-                        <li
-                          key={detail}
-                          className="inline-flex items-center px-3 py-1 bg-gold/10 rounded-full text-xs text-olive/60"
-                        >
-                          ✦ {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <p className="text-olive/70 leading-relaxed mb-4">{f.desc}</p>
+                  <ul className="flex flex-wrap gap-3">
+                    {f.details.map((detail) => (
+                      <li
+                        key={detail}
+                        className="inline-flex items-center px-3 py-1 bg-gold/10 rounded-full text-xs text-olive/60"
+                      >
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {/* Screenshot side */}
+                <div className={isReversed ? 'lg:order-1' : ''}>
+                  <BrowserFrame
+                    src={f.screenshot}
+                    alt={f.screenshotAlt}
+                    cropTop={f.cropTop || 0}
+                  />
                 </div>
               </div>
             );

@@ -36,8 +36,8 @@ export default function AboutPage() {
 
         <div className="space-y-6 text-lg text-olive/70 leading-relaxed mb-16">
           <p>
-            Built by Carmen Corio — the first enterprise CSM at Guesty,
-            with deep roots at HotelTonight and Airbnb — En Casa was born from
+            Built by Carmen Corio — from years of working closely with operators
+            across the hospitality industry — En Casa was born from
             a simple observation: the guest experience in boutique hospitality is broken.
           </p>
           <p>
@@ -58,11 +58,12 @@ export default function AboutPage() {
 
         <div className="border-t border-olive/10 pt-12 mb-16">
           <h2 className="font-serif text-2xl text-olive mb-4">Carmen Corio</h2>
-          <p className="font-mono text-xs uppercase tracking-wider text-gold mb-4">Founder</p>
+          <p className="font-mono text-xs uppercase tracking-wider text-gold mb-4">Founder &amp; CEO</p>
           <p className="text-olive/70 leading-relaxed max-w-xl">
-            Former HotelTonight, Airbnb, and the first enterprise Customer Success Manager
-            at Guesty. Carmen spent years inside the systems that power hospitality — and
-            saw firsthand what was missing for the guest.
+            Carmen brings years of firsthand experience working with operators
+            across luxury travel, property management, and boutique hospitality.
+            She built En Casa because she understood both sides —
+            what operators need to deliver, and what guests deserve to receive.
           </p>
         </div>
 
